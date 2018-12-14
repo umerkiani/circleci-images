@@ -129,6 +129,9 @@ if is_variant
 then
     echo "image is a variant image"
 
+    # lint Dockerfile
+    dockerlint ~/circleci-bundles/$DOCKERFILE_PATH
+
     # retry building for transient failures; note docker cache kicks in
     # and this should only restart with the last failed step
     docker build -t $IMAGE_NAME . || (sleep 2; echo "retry building $IMAGE_NAME"; docker build -t $IMAGE_NAME .)
@@ -144,6 +147,9 @@ then
     # variants don't get reused, clean them up
     docker image rm $IMAGE_NAME
 else
+    # lint Dockerfile
+    dockerlint ~/circleci-bundles/$DOCKERFILE_PATH
+
     # when building the new base image - always try to pull from latest
     # also keep new base images around for variants
     docker build --pull -t $IMAGE_NAME . || (sleep 2; echo "retry building $IMAGE_NAME"; docker build --pull -t $IMAGE_NAME .)
