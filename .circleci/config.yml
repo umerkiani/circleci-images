@@ -17,6 +17,10 @@ executors:
     docker:
       - image: cibuilds/github
 
+  machine:
+    shell: /bin/bash -eol pipefail
+    machine: true
+
 jobs:
   generate_dockerfiles:
     executor: gcc
@@ -194,7 +198,7 @@ jobs:
           cd ./shared/images; ./refresh-tools-cache
 
   generate_static_docs_site:
-    executor: github
+    executor: machine
     steps:
       - checkout
 
@@ -474,6 +478,10 @@ workflows:
       - circle-compare-url/reconstruct:
           name: reconstruct_compare_url
           resource-class: small
+          filters: # remove this later
+            branches:
+              ignore: static-docs-site
+
       - generate_dockerfiles:
           requires:
             - reconstruct_compare_url
