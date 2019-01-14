@@ -212,6 +212,7 @@ jobs:
             mkdir -p docs
             while read IMAGE
             do
+              echo "$IMAGE"
               curl "https://registry.hub.docker.com/v1/repositories/circleci/$IMAGE/tags" | jq -r '.[].name' | sort -h > "docs/$IMAGE.txt"
             done < BUNDLES.txt
 
