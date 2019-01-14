@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   circle-compare-url: iynere/compare-url@0.3.1
+  shellcheck: circleci/shellcheck@1.3.3
 
 jobs:
   generate_dockerfiles:
@@ -286,6 +287,12 @@ jobs:
 
       - store_test_results:
           path: test-results
+
+      - run:
+          when: always
+          name: generate static docs page
+          command: |
+
 
   publish_android:
     <<: *publish_image
