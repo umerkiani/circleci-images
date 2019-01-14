@@ -209,6 +209,7 @@ jobs:
       - run:
           name: generate tags lists
           command: |
+            mkdir -p docs
             while read IMAGE
             do
               curl "https://registry.hub.docker.com/v1/repositories/circleci/$IMAGE/tags" | jq -r '.[].name' | sort -h > "docs/$IMAGE.txt"
