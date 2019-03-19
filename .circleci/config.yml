@@ -371,13 +371,12 @@ jobs:
 
   publish_openjdk:
     <<: *publish_image
-    parallelism: 2
     environment:
       - PLATFORM: openjdk
 
   publish_php:
     <<: *publish_image
-    parallelism: 20
+    parallelism: 16
     environment:
       - PLATFORM: php
 

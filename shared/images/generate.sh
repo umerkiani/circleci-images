@@ -139,6 +139,7 @@ do
   mkdir -p images/$tag
 
   BASE_IMAGE=${BASE_REPO}:${tag}
+
   NEW_IMAGE=${NEW_REPO}:${tag}
 
   render_dockerfile_template $TEMPLATE > images/$tag/Dockerfile
