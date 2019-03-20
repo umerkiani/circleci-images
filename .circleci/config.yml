@@ -376,7 +376,7 @@ jobs:
 
   publish_php:
     <<: *publish_image
-    parallelism: 16
+    parallelism: 18
     environment:
       - PLATFORM: php
 
