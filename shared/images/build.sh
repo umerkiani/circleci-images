@@ -41,7 +41,7 @@ function update_aliases() {
           docker tag ${IMAGE_NAME} ${ALIAS_NAME}
           docker push ${ALIAS_NAME}
 
-          echo "${ALIAS_NAME}" >> CURRENT_TAGS.txt
+          echo "${ALIAS_NAME}" >> ~/circleci-bundles/CURRENT_TAGS.txt
 
           docker image rm ${ALIAS_NAME}
         else
@@ -50,13 +50,13 @@ function update_aliases() {
             docker tag ${IMAGE_NAME} ${ALIAS_NAME}
             docker push ${ALIAS_NAME}
 
-            echo "${ALIAS_NAME}" >> CURRENT_TAGS.txt
+            echo "${ALIAS_NAME}" >> ~/circleci-bundles/CURRENT_TAGS.txt
 
             docker image rm ${ALIAS_NAME}
             docker tag ${IMAGE_NAME} ${ALIAS_NAME_BRANCH_COMMIT}
             docker push ${ALIAS_NAME_BRANCH_COMMIT}
 
-            echo "${ALIAS_NAME_BRANCH_COMMIT}" >> CURRENT_TAGS.txt
+            echo "${ALIAS_NAME_BRANCH_COMMIT}" >> ~/circleci-bundles/CURRENT_TAGS.txt
 
             docker image rm ${ALIAS_NAME_BRANCH_COMMIT}
           fi
@@ -131,7 +131,7 @@ function handle_ccitest_org_images() {
         IMAGE_NAME_BRANCH_COMMIT=${REPO_NAME}:$(cat TAG)-${CIRCLE_BRANCH}-${CIRCLE_SHA1:0:12}
         docker tag ${IMAGE_NAME} ${IMAGE_NAME_BRANCH_COMMIT}
         docker push $IMAGE_NAME_BRANCH_COMMIT
-        echo "$IMAGE_NAME_BRANCH_COMMIT" >> CURRENT_TAGS.txt
+        echo "$IMAGE_NAME_BRANCH_COMMIT" >> ~/circleci-bundles/CURRENT_TAGS.txt
     fi
 }
 
@@ -152,7 +152,7 @@ then
     if [[ $PUSH_IMAGES == true ]]; then
         docker push $IMAGE_NAME
 
-        echo "$IMAGE_NAME" >> CURRENT_TAGS.txt
+        echo "$IMAGE_NAME" >> ~/circleci-bundles/CURRENT_TAGS.txt
 
         handle_ccitest_org_images
 
