@@ -4,4 +4,6 @@ NAME="buildpack-deps"
 BASE_REPO=buildpack-deps
 VARIANTS=(browsers)
 
+TAG_FILTER="grep -v -e disco"
+
 source ../shared/images/generate.sh
